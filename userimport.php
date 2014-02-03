@@ -12,19 +12,20 @@ function createUser($uName, $uEmail, $uPassword = null, $uAttributes) {
     echo "User name $uName exists.<br />";
   } 
   else {
-    $uName = $uName ?: $uEmail; // Default to email as username if none set
-    echo "Creating $uName<br />";
-    $ui = UserInfo::add(
-      ['uName' => $uName,
-      'uEmail' => $uEmail,
-      'uPassword' => $uPassword,
-      'uIsValidated' => LUM_VALIDATE], [UserInfo::ADD_OPTIONS_NOHASH]);
-    foreach($uAttributes as $attHandle=>$attValue) {
-      // If set to check, validate that the attribute in the 'from' site is in the 'to' site
-      if(!LUM_CHECK_ATTRIBUTES || UserAttributeKey::getByHandle($attHandle) ) {
-        $ui->setAttribute($attHandle, $attValue);
-      } else {
-        echo "Omitting attribute $attHandle.<br />";
+    if(null !== ($uName = $uName ?: $uEmail)) { // Default to email as username if none set
+      echo "Creating $uName<br />";
+      $ui = UserInfo::add(
+        ['uName' => $uName,
+        'uEmail' => $uEmail,
+        'uPassword' => $uPassword,
+        'uIsValidated' => LUM_VALIDATE], [UserInfo::ADD_OPTIONS_NOHASH]);
+      foreach($uAttributes as $attHandle=>$attValue) {
+        // If set to check, validate that the attribute in the 'from' site is in the 'to' site
+        if(!LUM_CHECK_ATTRIBUTES || UserAttributeKey::getByHandle($attHandle) ) {
+          $ui->setAttribute($attHandle, $attValue);
+        } else {
+          echo "Omitting attribute $attHandle.<br />";
+        }
       }
     }
   }
@@ -47,6 +48,10 @@ if(isset($_REQUEST['xml'])) {
   }
 }
 else if(isset($_REQUEST['json'])) {
+  $json = json_decode(file_get_contents($_REQUEST['json']));
+  foreach($json->{'Users'} as $user) {
+    createUser($user->{'name'}, $user->email, $user->raw_pass, $user->{'attributes'});
+  }
 }
 
 ?>

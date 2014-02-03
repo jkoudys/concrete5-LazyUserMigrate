@@ -9,9 +9,9 @@ $doc->loadXML(file_get_contents($_REQUEST['xml']));
 foreach($doc->getElementsByTagName('User') as $user) {
   $soauth = null;
   if(UserInfo::getByEmail($user_email = $user->getElementsByTagName('email')->item(0)->textContent)) {
-    echo "User {$user_email} exists.\n";
+    echo "User {$user_email} exists.<br />";
   } else {
-    echo "{$user_email}<br/>";
+    echo "{$user_email}<br />";
     $ui = UserInfo::add(
       ['uName' => $user->getElementsByTagName('name')->item(0)->textContent,
       'uEmail' => $user_email,

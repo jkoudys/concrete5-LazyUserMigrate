@@ -13,7 +13,7 @@ Installation & Use
 ------------------
 Copy the userexport.xml.php to the tools directory of your "from" site (e.g. oldsite/tools), and the userimport.php to the tools directory of the "to" site (e.g. newsite.tools). The userexport.xml can be retrieved directly, if you wish to save it somewhere else. The userimport takes the URL passed in the 'xml' parameter, and loads the xml into the user DB. For example:
 
-[example](http://mysite.com/tools/userimport&xml=http://mysite.com/oldinstance/tools/userexport.xml)
+`http://mysite.com/tools/userimport&xml=http://mysite.com/oldinstance/tools/userexport.xml`
 
 Notes
 -----

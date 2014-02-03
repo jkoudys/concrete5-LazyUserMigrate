@@ -36,7 +36,7 @@ foreach((new UserList())->get(3000) as $user) {
       $cdata = $node->ownerDocument->createCDATASection($uak);
       $node->appendChild($cdata);
       $attrNode->appendChild($node);
-    } else {
+    } else if(is_object($uak)) {
       // Put special cases for custom attribute objects here
       switch(get_class($uak)) {
       default:
@@ -46,8 +46,8 @@ foreach((new UserList())->get(3000) as $user) {
   }
 }
 
-header('Content-type: application/xml');
 $xmlOutput = $dom->saveXML();
+header('Content-type: application/xml');
 echo $xmlOutput;
 exit;
 ?>

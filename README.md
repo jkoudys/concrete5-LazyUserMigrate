@@ -11,7 +11,7 @@ All user attributes which are defined with a value() function that does a basic 
 
 Installation & Use
 ------------------
-Copy the userexport.xml.php to the tools directory of your "from" site (e.g. oldsite/tools), and the userimport.php to the tools directory of the "to" site (e.g. newsite.tools). The userexport.xml can be retrieved directly, if you wish to save it somewhere else. The userimport takes the URL passed in the 'xml' parameter, and loads the xml into the user DB. For example:
+Copy the userexport.xml.php or userexport.json.php to the tools directory of your "from" site (e.g. oldsite/tools), and the userimport.php to the tools directory of the "to" site (e.g. newsite.tools). The userexport.xml can be retrieved directly, if you wish to save it somewhere else. The userimport takes the URL passed in the 'xml' or 'json' parameter, and loads the xml/json into the user DB. For example:
 
 `http://mysite.com/tools/userimport&xml=http://mysite.com/oldinstance/tools/userexport.xml`
 
@@ -23,7 +23,7 @@ userimport parameters:
 
 Notes
 -----
-The export/import is using XML out of a combined sense of curiosity to learn XML in PHP and masochism. If you'd like this tool but would much prefer it use JSON, I'd be happy to include that option, and happier if you'd write it in and contribute it.
+The export/import is using XML out of a combined sense of curiosity to learn XML in PHP and masochism. JSON was a hundred times simpler to implement and is my preferred approach, but I will maintain the XML version simply to make things easier on people living in the corporate world who may want to load some c5 users into their enterprise system somewhere.
 
 WARNING
 -------

@@ -1,7 +1,7 @@
 concrete5 Lazy User Migrate
 =========================
 
-Quick and simple way to export your concrete5 users from one site and import them into another. Intended primarily for in-place migrations. Supports password migrations for same-salt instances, and user attributes.
+Quick and simple way to export your concrete5 users from one site and import them into another. Intended primarily for in-place migrations. Supports password migrations for same-salt instances, user attributes, and user groups.
 
 Description
 -----------

@@ -2,18 +2,18 @@
 defined('C5_EXECUTE') or die("Access Denied.");
 
 Loader::model('user_list');
-$nh = Loader::helper('navigation');
 
 function createUser($uName, $uEmail, $uPassword = null, $uAttributes, $uGroups) {
+  $l = new Log('LazyUserMigrate', true);
   if(null !== UserInfo::getByEmail($uEmail)) {
-    echo "User email $uEmail exists.<br />";
+    $l->write("User email $uEmail exists.");
   }
   else if(null !== UserInfo::getByUserName($uName)) {
-    echo "User name $uName exists.<br />";
+    $l->write("User name $uName exists.");
   } 
   else {
     if(null !== ($uName = $uName ?: $uEmail)) { // Default to email as username if none set
-      echo "Creating $uName<br />";
+      $l->write("Creating $uName");
       $ui = UserInfo::add(
         ['uName' => $uName,
         'uEmail' => $uEmail,
@@ -25,10 +25,10 @@ function createUser($uName, $uEmail, $uPassword = null, $uAttributes, $uGroups) 
           try {
             $ui->setAttribute($attHandle, $attValue);
           } catch(Exception $e) {
-            echo "Error setting attribute $attHandle for $uName. Check that attribute exists in target and is of the correct type.<br />";
+            $l->write("Error setting attribute $attHandle for $uName. Check that attribute exists in target and is of the correct type.");
           }
         } else {
-          echo "Omitting attribute $attHandle.<br />";
+          $l->write("Omitting attribute $attHandle.");
         }
       }
       foreach((array) $uGroups as $gid=>$groupName) {
@@ -36,12 +36,13 @@ function createUser($uName, $uEmail, $uPassword = null, $uAttributes, $uGroups) 
           try {
             $ui->getUserObject()->enterGroup($group);
           } catch(Exception $e) {
-            echo "Error adding $uName to $groupName.<br />";
+            $l->write("Error adding $uName to $groupName.");
           }
         }
       }
     }
   }
+  $l->close();
 }
 
 define('LUM_VALIDATE', isset($_REQUEST['validate']) ? $validate : 1);

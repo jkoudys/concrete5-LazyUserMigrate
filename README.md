@@ -17,7 +17,7 @@ Copy the userexport.xml.php or userexport.json.php to the tools directory of you
 
 userimport parameters:
 * xml : The URL to the XML file containing your users to import. Usually, but not required to be, exported by userexport.xml.
-* json : The URL to the JSON file containing your users to import. (unimplemented)
+* json : The URL to the JSON file containing your users to import.
 * validate : 1 to mark all created users as valid, 0 to require they be validated. (default 1)
 * checkAttributes : Set to validate that user attributes in the "from" site exist in the "to", and do not attempt to update them if they don't. Causes a performance hit if enabled, so only use this if you know the two sites won't match up. (default false)
 

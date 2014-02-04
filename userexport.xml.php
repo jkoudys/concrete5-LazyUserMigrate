@@ -44,6 +44,17 @@ foreach((new UserList())->get(3000) as $user) {
       }
     }
   }
+  $node = $dom->createElement('Groups');
+  $groupNode = $userNode->appendChild($node);
+  foreach((array) $user->getUserObject()->getUserGroups() as $gID=>$group) {
+    $node = $dom->createElement("group");
+    $cdata = $node->ownerDocument->createCDATASection($group);
+    $node->appendChild($cdata);
+    $groupAttr = $dom->createAttribute('id');
+    $groupAttr->value = $gID;
+    $node->appendChild($groupAttr);
+    $groupNode->appendChild($node);
+  }
 }
 
 $xmlOutput = $dom->saveXML();

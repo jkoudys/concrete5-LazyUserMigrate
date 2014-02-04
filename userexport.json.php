@@ -18,11 +18,16 @@ foreach((new UserList())->get(3000) as $user) {
       }
     }
   }
+  $groups = array();
+  foreach((array) $user->getUserObject()->getUserGroups() as $gID=>$group) {
+    $groups[] = array($gID => $group);
+  }
   $users['Users'][] = array(
     'name' => $user->getUserName(),
     'email' => $user->getUserEmail(),
     'raw_pass' => $user->getUserPassword(),
-    'attributes' => $attributes);
+    'attributes' => $attributes,
+    'groups' => $groups );
 }
 header('Content-type: application/json');
 echo json_encode($users);

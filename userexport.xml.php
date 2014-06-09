@@ -1,5 +1,5 @@
 <?php
-defined('C5_EXECUTE') or die("Access Denied.");
+defined('C5_EXECUTE') || die('Access Denied.');
 $nh = Loader::helper('navigation');
 Loader::model('user_list');
 
@@ -61,4 +61,3 @@ $xmlOutput = $dom->saveXML();
 header('Content-type: application/xml');
 echo $xmlOutput;
 exit;
-?>

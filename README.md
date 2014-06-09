@@ -11,7 +11,9 @@ All user attributes which are defined with a value() function that does a basic 
 
 Installation & Use
 ------------------
-Copy the userexport.xml.php or userexport.json.php to the tools directory of your "from" site (e.g. oldsite/tools), and the userimport.php to the tools directory of the "to" site (e.g. newsite.tools). The userexport.xml can be retrieved directly, if you wish to save it somewhere else. The userimport takes the URL passed in the 'xml' or 'json' parameter, and loads the xml/json into the user DB. For example:
+Copy the userexport.xml.php or userexport.json.php to the tools directory of your "from" site (e.g. oldsite/tools), and the userimport.php to the tools directory of the "to" site (e.g. newsite.tools). The userexport.xml can be retrieved directly, if you wish to save it somewhere else. If you're interested in only using the userimport, you'll still find the userexport useful as it can create good sample data for you to use as a guide when exporting from your other system.
+
+The userimport takes the URL passed in the 'xml' or 'json' parameter, and loads the xml/json into the user DB. For example, to do a in-place migration of users from your old instance to a new one:
 
 `http://mysite.com/tools/userimport&xml=http://mysite.com/oldinstance/tools/userexport.xml`
 

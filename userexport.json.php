@@ -1,11 +1,10 @@
 <?php
-defined('C5_EXECUTE') or die("Access Denied.");
+defined('C5_EXECUTE') || die('Access Denied.');
 $nh = Loader::helper('navigation');
 Loader::model('user_list');
 
-
 $users = array();
-foreach((new UserList())->get(3000) as $user) {
+foreach((new UserList())->get() as $user) {
   $attributes = array();
   foreach(UserAttributeKey::getAttributes($user->getUserID()) as $key=>$uak) {
     if(is_string($uak)) {
@@ -32,4 +31,3 @@ foreach((new UserList())->get(3000) as $user) {
 header('Content-type: application/json');
 echo json_encode($users);
 exit;
-?>
